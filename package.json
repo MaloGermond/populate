@@ -1,0 +1,11 @@
+{
+  "name": "Populate",
+  "version": "0.1.0",
+  "description": "Populate convert and optimize assets stacks",
+  "main": "index.js",
+  "author": "Malo germond",
+  "license": "MIT",
+  "scripts": {
+		"build": "node index.js"
+	}
+}
