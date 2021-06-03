@@ -4,6 +4,9 @@ const path = require('path');
 
 const ttfToWoff2 = require('ttf2woff2');
 const ttfToWoff = require('ttf2woff');
+const {
+	generateFonts
+} = require('fantasticon')
 
 const Utils = require("../src/Utils");
 
@@ -67,21 +70,21 @@ class Font {
 		})
 	}
 
-	exportTTF(file, from, to) {
+	exportTTF(from, to, label) {
 		if (!fs.existsSync(from))
 			throw new Error(`File does not exist: ${from}`);
 		if (!fs.existsSync(to))
 			throw new Error(`File does not exist: ${to}`);
 
-		const input = path.join(from, file + ".ttf")
-		const output = path.join(to, file + ".ttf")
+		const input = path.join(from, label + ".ttf")
+		const output = path.join(to, label + ".ttf")
 
 		Utils.copyFile(input, output)
 
 		console.info("✅  TTF   fonts has been exported to: " + output)
 	}
 
-	exportWOFF(label, from, to) {
+	exportWOFF(from, to, label) {
 		if (!fs.existsSync(from))
 			throw new Error(`File does not exist: ${from}`);
 		if (!fs.existsSync(to))
@@ -91,18 +94,18 @@ class Font {
 		const output = path.join(to, label + ".woff")
 
 		const file = fs.readFileSync(input)
-		const woff = Buffer.from(ttfToWoff(new Uint8Array(file), {}).buffer)
-		fs.writeFileSync(output , woff)
+		// const woff = Buffer.from(ttfToWoff(new Uint8Array(file), {}).buffer)
+		fs.writeFileSync(output, ttfToWoff(new Uint8Array(file), {}).buffer)
 
 		console.info("✅  WOTF  fonts has been exported to: " + output)
 
 	}
 
-	exportWOFF2(label, from, to) {
+	exportWOFF2(from, to, label) {
 		if (!fs.existsSync(from))
-			throw new Error(`File does not exist: ${from}`);
+			throw new Error(`File does not exist: ${from}`)
 		if (!fs.existsSync(to))
-			throw new Error(`File does not exist: ${to}`);
+			throw new Error(`File does not exist: ${to}`)
 
 		const input = path.join(from, label + ".ttf")
 		const output = path.join(to, label + ".woff2")
@@ -113,6 +116,22 @@ class Font {
 		const buffer = fs.readFileSync(input)
 		fs.writeFileSync(output, ttfToWoff2(buffer))
 		console.info("✅  WOTF2 fonts has been exported to: " + output)
+	}
+
+	SVGToTTF(from, to) {
+		if (!fs.existsSync(from))
+			throw new Error(`File does not exist: ${from}`)
+		if (!fs.existsSync(to))
+			throw new Error(`File does not exist: ${to}`)
+
+		generateFonts({
+			inputDir: from, // (required)
+			outputDir: to, // (required)
+			fontTypes: ['ttf', 'woff', 'woff2'],
+
+		})
+
+		console.info("✅  SVG  folder has been convert to: " + to)
 	}
 }
 

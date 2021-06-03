@@ -42,6 +42,16 @@ class Utils {
 			})
 		}
 	}
+
+	/*
+		 Removed all files inside a folder
+	*/
+	cleanFolder(path) {
+		if (!fs.existsSync(path))
+			throw new Error(`Folder does not exist: ${path}`)
+
+		fs.rm(path)
+	}
 }
 
 module.exports = new Utils();
