@@ -1,7 +1,9 @@
 const fs = require('fs')
 const fsx = require('fs-extra')
+const path = require('path');
 
 const ttfToWoff2 = require('ttf2woff2');
+const ttfToWoff = require('ttf2woff');
 
 const Utils = require("../src/Utils");
 
@@ -65,22 +67,52 @@ class Font {
 		})
 	}
 
-	exportTTF(file, source, directory) {
-		const output = directory + file.attributes["subitem"] + "-" + file.attributes["state"] + ".ttf"
+	exportTTF(file, from, to) {
+		if (!fs.existsSync(from))
+			throw new Error(`File does not exist: ${from}`);
+		if (!fs.existsSync(to))
+			throw new Error(`File does not exist: ${to}`);
 
-		Utils.copyFile(source, output)
+		const input = path.join(from, file + ".ttf")
+		const output = path.join(to, file + ".ttf")
 
-		console.info("✅ TTF fonts has been exported to: " + output)
+		Utils.copyFile(input, output)
+
+		console.info("✅  TTF   fonts has been exported to: " + output)
 	}
 
-	exportWOFF2(file, source, directory) {
-		const output = directory + file.attributes["subitem"] + "-" + file.attributes["state"] + ".woff2"
+	exportWOFF(label, from, to) {
+		if (!fs.existsSync(from))
+			throw new Error(`File does not exist: ${from}`);
+		if (!fs.existsSync(to))
+			throw new Error(`File does not exist: ${to}`);
+
+		const input = path.join(from, label + ".ttf")
+		const output = path.join(to, label + ".woff")
+
+		const file = fs.readFileSync(input)
+		const woff = Buffer.from(ttfToWoff(new Uint8Array(file), {}).buffer)
+		fs.writeFileSync(output , woff)
+
+		console.info("✅  WOTF  fonts has been exported to: " + output)
+
+	}
+
+	exportWOFF2(label, from, to) {
+		if (!fs.existsSync(from))
+			throw new Error(`File does not exist: ${from}`);
+		if (!fs.existsSync(to))
+			throw new Error(`File does not exist: ${to}`);
+
+		const input = path.join(from, label + ".ttf")
+		const output = path.join(to, label + ".woff2")
+
 		/*
-			 This solution use ressources a lot... sorry 🙏
+			 This solution take time and use ressources a lot... sorry 🙏
 		*/
-		const buffer = fs.readFileSync(source)
+		const buffer = fs.readFileSync(input)
 		fs.writeFileSync(output, ttfToWoff2(buffer))
-		console.info("✅ WOTF2 fonts has been exported to: " + output)
+		console.info("✅  WOTF2 fonts has been exported to: " + output)
 	}
 }
 
