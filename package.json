@@ -6,7 +6,8 @@
   "author": "Malo germond",
   "license": "MIT",
   "scripts": {
-    "build": "node index.js"
+    "build": "node index.js",
+    "clean": "node clean.js"
   },
   "dependencies": {
     "fantasticon": "^1.2.2",

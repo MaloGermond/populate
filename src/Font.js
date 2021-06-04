@@ -70,42 +70,31 @@ class Font {
 		})
 	}
 
-	exportTTF(from, to, label) {
+
+	async TTFToWOFF(from, to, label) {
 		if (!fs.existsSync(from))
 			throw new Error(`File does not exist: ${from}`);
+
 		if (!fs.existsSync(to))
-			throw new Error(`File does not exist: ${to}`);
-
-		const input = path.join(from, label + ".ttf")
-		const output = path.join(to, label + ".ttf")
-
-		Utils.copyFile(input, output)
-
-		console.info("✅  TTF   fonts has been exported to: " + output)
-	}
-
-	exportWOFF(from, to, label) {
-		if (!fs.existsSync(from))
-			throw new Error(`File does not exist: ${from}`);
-		if (!fs.existsSync(to))
-			throw new Error(`File does not exist: ${to}`);
+			await Utils.createFolder(to)
 
 		const input = path.join(from, label + ".ttf")
 		const output = path.join(to, label + ".woff")
 
 		const file = fs.readFileSync(input)
 		// const woff = Buffer.from(ttfToWoff(new Uint8Array(file), {}).buffer)
-		fs.writeFileSync(output, ttfToWoff(new Uint8Array(file), {}).buffer)
+		await fs.writeFileSync(output, ttfToWoff(new Uint8Array(file), {}).buffer)
 
 		console.info("✅  WOTF  fonts has been exported to: " + output)
 
 	}
 
-	exportWOFF2(from, to, label) {
+	async TTFToWOFF2(from, to, label) {
 		if (!fs.existsSync(from))
 			throw new Error(`File does not exist: ${from}`)
 		if (!fs.existsSync(to))
-			throw new Error(`File does not exist: ${to}`)
+			await Utils.createFolder(to)
+
 
 		const input = path.join(from, label + ".ttf")
 		const output = path.join(to, label + ".woff2")
@@ -114,24 +103,25 @@ class Font {
 			 This solution take time and use ressources a lot... sorry 🙏
 		*/
 		const buffer = fs.readFileSync(input)
-		fs.writeFileSync(output, ttfToWoff2(buffer))
+		await fs.writeFileSync(output, ttfToWoff2(buffer))
 		console.info("✅  WOTF2 fonts has been exported to: " + output)
 	}
 
-	SVGToTTF(from, to) {
+	async SVGToTTF(from, to) {
 		if (!fs.existsSync(from))
 			throw new Error(`File does not exist: ${from}`)
 		if (!fs.existsSync(to))
-			throw new Error(`File does not exist: ${to}`)
+			// throw new Error(`File does not exist: ${to}`)
+			await Utils.createFolder(to)
 
-		generateFonts({
+		await generateFonts({
 			inputDir: from, // (required)
 			outputDir: to, // (required)
-			fontTypes: ['ttf', 'woff', 'woff2'],
-
+			fontTypes: ['ttf'],
+			assetTypes: ['css', 'html'],
 		})
 
-		console.info("✅  SVG  folder has been convert to: " + to)
+		console.info("✅  SVG -> TTF has been convert to: " + to)
 	}
 }
 

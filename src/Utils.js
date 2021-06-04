@@ -1,4 +1,6 @@
 const fs = require('fs')
+const fsx = require('fs-extra')
+const path = require('path');
 
 class Utils {
 
@@ -17,31 +19,19 @@ class Utils {
 	}
 
 	/*
-		 Copy file from one place to an other
-		 Require to provide a path for both argument.
-	*/
-
-	copyFile(source, target) {
-		fs.copyFileSync(source, target);
-	}
-
-	/*
 		 Create a folder at specific path
 		 1. check if the folder doesn't exists
 		 2. create the folder
 	*/
 
-	createFolder(path) {
+	async createFolder(path) {
 		if (!fs.existsSync(path)) {
-			console.info("🔎 This folder: " + path + " doesn't exists")
-			fs.mkdir(path, (err) => {
-				if (err) {
-					return console.error(err)
-				}
-				console.info("✅ This folder: " + path + " directory created successfully!")
-			})
+			console.info("🔎  The folder: " + path + " doesn't exists")
+			await fsx.mkdirs(path)
+			console.info("✅  The folder: " + path + " has been created successfully!")
 		}
 	}
+
 
 	/*
 		 Removed all files inside a folder
@@ -49,8 +39,8 @@ class Utils {
 	cleanFolder(path) {
 		if (!fs.existsSync(path))
 			throw new Error(`Folder does not exist: ${path}`)
-
-		fs.rm(path)
+		fsx.emptyDir(path)
+			.then(console.info("✅  The folder: " + path + " has been clean successfully!"))
 	}
 }
 
