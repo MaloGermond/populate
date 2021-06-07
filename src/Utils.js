@@ -1,6 +1,6 @@
 const fs = require('fs')
 const fsx = require('fs-extra')
-const path = require('path');
+const path = require('path')
 
 class Utils {
 
