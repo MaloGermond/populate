@@ -84,8 +84,6 @@ class Font {
 		// // const woff = Buffer.from(ttfToWoff(new Uint8Array(file), {}).buffer)
 		await fs.writeFileSync(output, ttfToWoff(new Uint8Array(file), {}).buffer)
 
-		console.info("✅  WOTF  fonts has been exported to: " + output)
-
 	}
 
 	async TTFToWOFF2(from, to) {
@@ -102,24 +100,23 @@ class Font {
 		// */
 		const buffer = fs.readFileSync(from)
 		await fs.writeFileSync(output, ttfToWoff2(buffer))
-		console.info("✅  WOTF2 fonts has been exported to: " + output)
 	}
 
-	async SVGToTTF(from, to) {
+	async SVGToTTF(from, to, option) {
 		if (!fs.existsSync(from))
-			throw new Error(`File does not exist: ${from}`)
+			throw new Error(`Folder does not exist: ${from}`)
 		if (!fs.existsSync(to))
-			// throw new Error(`File does not exist: ${to}`)
 			await Utils.createFolder(to)
+
+		const fontTypes = option.fontTypes ? option.fontTypes : ['ttf', 'woff', 'woff2']
+		const assetTypes = option.assetTypes ? option.assetTypes : ['css', 'html', 'json', 'ts']
 
 		await generateFonts({
 			inputDir: from, // (required)
 			outputDir: to, // (required)
-			fontTypes: ['ttf'],
-			assetTypes: ['css', 'html'],
+			fontTypes: fontTypes,
+			assetTypes: assetTypes,
 		})
-
-		console.info("✅  SVG -> TTF has been convert to: " + to)
 	}
 }
 

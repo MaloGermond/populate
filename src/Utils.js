@@ -11,9 +11,7 @@ class Utils {
 	*/
 	async createFolder(path) {
 		if (!fs.existsSync(path)) {
-			console.info("🔎  The folder: " + path + " doesn't exists")
 			await fsx.mkdirs(path)
-			console.info("✅  The folder: " + path + " has been created successfully!")
 		}
 	}
 
@@ -24,7 +22,6 @@ class Utils {
 		if (!fs.existsSync(path))
 			throw new Error(`Folder does not exist: ${path}`)
 		fsx.emptyDir(path)
-			.then(console.info("✅  The folder: " + path + " has been clean successfully!"))
 	}
 
 }
