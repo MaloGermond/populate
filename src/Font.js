@@ -71,38 +71,36 @@ class Font {
 	}
 
 
-	async TTFToWOFF(from, to, label) {
+	async TTFToWOFF(from, to) {
 		if (!fs.existsSync(from))
-			throw new Error(`File does not exist: ${from}`);
+			throw new Error(`File does not exist: ${from}`)
 
-		if (!fs.existsSync(to))
-			await Utils.createFolder(to)
+		if (!fs.existsSync(path.dirname(to)))
+			await fsx.mkdirs(path.dirname(to))
 
-		const input = path.join(from, label + ".ttf")
-		const output = path.join(to, label + ".woff")
+		const output = to + ".woff"
 
-		const file = fs.readFileSync(input)
-		// const woff = Buffer.from(ttfToWoff(new Uint8Array(file), {}).buffer)
+		const file = fs.readFileSync(from)
+		// // const woff = Buffer.from(ttfToWoff(new Uint8Array(file), {}).buffer)
 		await fs.writeFileSync(output, ttfToWoff(new Uint8Array(file), {}).buffer)
 
 		console.info("✅  WOTF  fonts has been exported to: " + output)
 
 	}
 
-	async TTFToWOFF2(from, to, label) {
+	async TTFToWOFF2(from, to) {
 		if (!fs.existsSync(from))
 			throw new Error(`File does not exist: ${from}`)
-		if (!fs.existsSync(to))
-			await Utils.createFolder(to)
 
+		if (!fs.existsSync(path.dirname(to)))
+			await fsx.mkdirs(path.dirname(to))
 
-		const input = path.join(from, label + ".ttf")
-		const output = path.join(to, label + ".woff2")
+		const output = to + ".woff2"
 
-		/*
-			 This solution take time and use ressources a lot... sorry 🙏
-		*/
-		const buffer = fs.readFileSync(input)
+		// /*
+		// 	 This solution take time and use ressources a lot... sorry 🙏
+		// */
+		const buffer = fs.readFileSync(from)
 		await fs.writeFileSync(output, ttfToWoff2(buffer))
 		console.info("✅  WOTF2 fonts has been exported to: " + output)
 	}

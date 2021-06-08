@@ -10,7 +10,8 @@ class Image {
 	}
 
 	async SVGToPNG(from, to, option) {
-
+		if(!fs.existsSync(from))
+			throw new Error(`File does not exist: ${from}`)
 		if (!fs.existsSync(path.dirname(to)))
 			// throw new Error(`File does not exist: ${to}`)
 			await Utils.createFolder(path.dirname(to))
@@ -24,5 +25,6 @@ class Image {
 			.resize(option)
 			.toFile(to)
 	}
+}
 
 module.exports = new Image()

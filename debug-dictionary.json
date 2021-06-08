@@ -1,0 +1,208 @@
+{
+	"properties": [
+		{
+			"path": "Roboto-Regular.ttf",
+			"extension": [
+				"ttf",
+				"woff",
+				"woff2"
+			],
+			"folder": "fonts"
+		},
+		{
+			"path": "Roboto-Medium.ttf",
+			"extension": [
+				"ttf",
+				"woff",
+				"woff2"
+			],
+			"folder": "fonts"
+		},
+		{
+			"path": "Roboto-Bold.ttf",
+			"extension": [
+				"ttf",
+				"woff",
+				"woff2"
+			],
+			"folder": "fonts"
+		},
+		{
+			"path": "icons",
+			"extension": [
+				"ttf"
+			],
+			"folder": "icons"
+		},
+		{
+			"path": "logotype-brand__high.png",
+			"extension": [
+				"png"
+			],
+			"width": 340,
+			"height": 124,
+			"folder": "images"
+		},
+		{
+			"path": "illustration-security-technology.png",
+			"extension": [
+				"png"
+			],
+			"folder": "images"
+		},
+		{
+			"path": "illustration-preview-alias-module.png",
+			"extension": [
+				"png"
+			],
+			"folder": "images"
+		},
+		{
+			"path": "logo-brand__low.png",
+			"rename": "favicon",
+			"extension": [
+				"png"
+			],
+			"format": [
+				16,
+				32
+			],
+			"folder": "appicons"
+		},
+		{
+			"path": "logo-brand__low.png",
+			"rename": "android-chrome",
+			"extension": [
+				"png"
+			],
+			"format": [
+				192,
+				512
+			],
+			"folder": "appicons"
+		},
+		{
+			"path": "logo-brand__low.png",
+			"rename": "apple-touch-icon",
+			"extension": [
+				"png"
+			],
+			"format": [
+				192,
+				512
+			],
+			"folder": "appicons"
+		},
+		{
+			"path": "logo-brand__low.png",
+			"rename": "safari-pinned-tab",
+			"extension": [
+				"svg"
+			],
+			"folder": "appicons"
+		}
+	],
+	"allProperties": [
+		{
+			"path": "Roboto-Regular.ttf",
+			"extension": [
+				"ttf",
+				"woff",
+				"woff2"
+			],
+			"folder": "fonts"
+		},
+		{
+			"path": "Roboto-Medium.ttf",
+			"extension": [
+				"ttf",
+				"woff",
+				"woff2"
+			],
+			"folder": "fonts"
+		},
+		{
+			"path": "Roboto-Bold.ttf",
+			"extension": [
+				"ttf",
+				"woff",
+				"woff2"
+			],
+			"folder": "fonts"
+		},
+		{
+			"path": "icons",
+			"extension": [
+				"ttf"
+			],
+			"folder": "icons"
+		},
+		{
+			"path": "logotype-brand__high.png",
+			"extension": [
+				"png"
+			],
+			"width": 340,
+			"height": 124,
+			"folder": "images"
+		},
+		{
+			"path": "illustration-security-technology.png",
+			"extension": [
+				"png"
+			],
+			"folder": "images"
+		},
+		{
+			"path": "illustration-preview-alias-module.png",
+			"extension": [
+				"png"
+			],
+			"folder": "images"
+		},
+		{
+			"path": "logo-brand__low.png",
+			"rename": "favicon",
+			"extension": [
+				"png"
+			],
+			"format": [
+				16,
+				32
+			],
+			"folder": "appicons"
+		},
+		{
+			"path": "logo-brand__low.png",
+			"rename": "android-chrome",
+			"extension": [
+				"png"
+			],
+			"format": [
+				192,
+				512
+			],
+			"folder": "appicons"
+		},
+		{
+			"path": "logo-brand__low.png",
+			"rename": "apple-touch-icon",
+			"extension": [
+				"png"
+			],
+			"format": [
+				192,
+				512
+			],
+			"folder": "appicons"
+		},
+		{
+			"path": "logo-brand__low.png",
+			"rename": "safari-pinned-tab",
+			"extension": [
+				"svg"
+			],
+			"folder": "appicons"
+		}
+	]
+}

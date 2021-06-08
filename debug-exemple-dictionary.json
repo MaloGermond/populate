@@ -1,0 +1,38 @@
+{
+	"properties": {},
+	"allProperties": [
+		{
+			"source": "Roboto-Regular.ttf",
+			"type": "file",
+			"extension": ".ttf",
+			"exportPath": "fonts/Roboto-Regular.ttf"
+		},
+		{
+			"source": "Roboto-Regular.ttf",
+			"type": "file",
+			"extension": ".ttf",
+			"exportPath": "fonts/Roboto-Regular.woff"
+		},
+		{
+			"source": "Roboto-Regular.ttf",
+			"type": "file",
+			"extension": ".ttf",
+			"exportPath": "fonts/Roboto-Regular.woff2"
+		},
+		{
+			"source": "icons",
+			"type": "folder",
+			"extension": "ttf",
+			"exportPath": "icons/"
+		},
+		{
+			"source": "logotype-brand__high.png",
+			"type": "file",
+			"extension": "png",
+			"attributes": {
+				"width": 340,
+				"height": 124
+			}
+		}
+	]
+}
