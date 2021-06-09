@@ -10,51 +10,24 @@ class Populate {
 
 	async build(source, root) {
 		const properties = await fsx.readJson(source)
-		if (root === undefined) root = "../"
+		if (root === undefined) root = "../build"
+		if (!fs.existsSync(root)) fsx.mkdirs(root)
 		console.log("🎯  root export are: " + root)
 
-		// await this.exportFont(properties.font, root)
 		await this.buildFont(properties.buildFont, root)
+		console.log("🏭️  Font has been successfully build")
+		await this.exportFont(properties.font, root)
+		console.log("⚒️  Font has been successfully converted")
+		await this.exportImages(properties.image, root)
+		console.log("🖼️  Images has been successfully converted")
 
-
-		//
-		//
-		//
-		// /*
-		// 	 Here we convert svg to png or svgo
-		// */
-		//
-		// properties.filter(el => path.extname(el.path) === '.svg').map(el => {
-		// 	let name = path.basename(el.path, ".svg")
-		//
-		// 	if (el.rename) {
-		// 		name = el.rename
-		// 	}
-		//
-		// 	const output = path.join("build", el.folder, name)
-		//
-		// 	if (el.extension === 'png') {
-		// 		if (el.format) {
-		// 			el["format"].map(size => Image.SVGToPNG(el.path, output + "_" + size + "x" + size + ".png", size))
-		// 		} else {
-		// 			Image.SVGToPNG(el.path, output + ".png")
-		// 		}
-		// 	}
-		//
-		// 	if (el.extension === 'svg') {
-		// 		fsx.copy(el.path, output+".svg")
-		// 	}
-		//
-		// })
-
-		return
 	}
 
 	/*
 		 Here we convert and export font
 	*/
 	async exportFont(dictionary, root) {
-		dictionary.map(el => {
+		const temp = dictionary.map(async el => {
 			if (!fs.existsSync(el.path))
 				throw new Error(`File does not exist: ${el.path}`)
 
@@ -69,23 +42,24 @@ class Populate {
 			const output = path.join(root, folder, name)
 
 			el["extension"].filter(ext => ext === "ttf").map(ext => {
-				fsx.copy(el.path, output + ".ttf")
+				return fsx.copy(el.path, output + ".ttf")
 			})
 			el["extension"].filter(ext => ext === "woff").map(ext => {
-				Font.TTFToWOFF(el.path, output)
+				return Font.TTFToWOFF(el.path, output)
 			})
 			el["extension"].filter(ext => ext === "woff2").map(ext => {
-				Font.TTFToWOFF2(el.path, output)
+				return Font.TTFToWOFF2(el.path, output)
 			})
 		})
+
+		await Promise.all(temp)
 	}
 
 	/*
 	// 	 Here we create a font icons
 	*/
 	async buildFont(dictionary, root) {
-		dictionary.map(el => {
-
+		const temp = dictionary.map(async el => {
 			if (!fs.existsSync(el.path))
 				throw new Error(`File does not exist: ${el.path}`)
 
@@ -100,8 +74,38 @@ class Populate {
 				"assetTypes": el.assetTypes
 			}
 
-			Font.SVGToTTF(el.path, output, option)
+			return Font.SVGToTTF(el.path, output, option)
 		})
+
+		await Promise.all(temp)
+	}
+
+	/*
+	// 	 Here we convert and copy images
+	*/
+	async exportImages(dictionary, root) {
+		const temp = dictionary.map(async el => {
+			if (!fs.existsSync(el.path))
+				throw new Error(`File does not exist: ${el.path}`)
+
+			if (path.extname(el.path) != '.svg')
+				throw new Error(`Wrong path: ${el.path}. svg extension is require`)
+
+			const name = el.rename ? el.rename : path.basename(el.path, ".svg")
+			const output = path.join(root, el.folder, name)
+
+			if (el.extension === 'png') {
+				for (var option of el["option"]) {
+					await Image.SVGToPNG(el.path, output, option)
+				}
+			}
+
+			if (el.extension === 'svg') {
+				fsx.copy(el.path, output + ".svg")
+			}
+		})
+
+		await Promise.all(temp)
 	}
 
 	async write(source) {
@@ -111,7 +115,6 @@ class Populate {
 			'spaces': '\t'
 		})
 	}
-
 
 }
 
