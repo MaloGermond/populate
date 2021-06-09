@@ -12,19 +12,24 @@ Populate convert, optimize, rename and organise your assets. From one sources to
 
 ```json
 {
-	"buildFont": [{
-		"path": "properties/assets/icons",
-		"output": "icons",
-		"fontTypes": ["ttf"],
-		"assetTypes": ["css", "html"]
-	}],
-	"font": [{
+	"buildFont": [
+		{
+			"path": "properties/assets/icons",
+			"output": "icons",
+			"fontTypes": ["ttf"],
+			"assetTypes": ["css", "html"]
+		}
+	],
+
+	"font": [
+		{
 			"path": "properties/assets/fonts/Roboto-Regular.ttf",
 			"rename": "medium",
 			"output": "fonts",
 			"extension": ["ttf", "woff", "woff2"]
 		}
 	],
+
 	"image": [
 		{
 			"path": "properties/assets/images/illustration-pain-alias-module.svg",
@@ -34,6 +39,7 @@ Populate convert, optimize, rename and organise your assets. From one sources to
 				"width": 700,
 				"height": 448
 			}]
+		},
 		{
 			"path": "properties/assets/images/logo-brand__low.svg",
 			"rename": "favicon",
