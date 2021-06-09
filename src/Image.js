@@ -1,11 +1,34 @@
 const fs = require('fs')
 const path = require('path');
 const sharp = require("sharp")
+const {
+	optimize
+} = require('svgo');
 
 const Utils = require("../src/Utils");
 
 class Image {
-	SVGToSVGO() {
+	async SVGToSVGO(from, to) {
+		if (!fs.existsSync(from))
+			throw new Error(`File does not exist: ${from}`)
+		if (!fs.existsSync(path.dirname(to)))
+			await Utils.createFolder(path.dirname(to))
+
+		const output = to + ".svg"
+
+		const svg = await fs.readFileSync(from, (err, data) => {
+			if (err) console.error(err)
+			svg = dat
+		})
+
+		const svgo = await optimize(svg, {
+			// optional but recommended field
+			path: output,
+			// all config fields are also available here
+			multipass: true
+		})
+
+		await fs.writeFileSync(output, svgo.data)
 
 	}
 
@@ -41,7 +64,10 @@ class Image {
 		let output = to + name + "_" + prefix + ".png"
 
 		await sharp(from)
-			.png({"compressionLevel": 9, "quality": 100})
+			.png({
+				"compressionLevel": 9,
+				"quality": 100
+			})
 			.resize(resize)
 			.toFile(output)
 	}

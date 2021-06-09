@@ -101,7 +101,7 @@ class Populate {
 			}
 
 			if (el.extension === 'svg') {
-				fsx.copy(el.path, output + ".svg")
+				Image.SVGToSVGO(el.path, output)
 			}
 		})
 
