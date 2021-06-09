@@ -96,5 +96,5 @@ Option currently support:
 
 Additional settings
 
--       size: shortcut that will convert to width x height size.
+-   size: shortcut that will convert to width x height size.
 -   rename: rename the output file
