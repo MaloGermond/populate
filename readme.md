@@ -12,19 +12,24 @@ Populate convert, optimize, rename and organise your assets. From one sources to
 
 ```json
 {
-	"buildFont": [{
-		"path": "properties/assets/icons",
-		"output": "icons",
-		"fontTypes": ["ttf"],
-		"assetTypes": ["css", "html"]
-	}],
-	"font": [{
+	"buildFont": [
+		{
+			"path": "properties/assets/icons",
+			"output": "icons",
+			"fontTypes": ["ttf"],
+			"assetTypes": ["css", "html"]
+		}
+	],
+
+	"font": [
+		{
 			"path": "properties/assets/fonts/Roboto-Regular.ttf",
 			"rename": "medium",
 			"output": "fonts",
 			"extension": ["ttf", "woff", "woff2"]
 		}
 	],
+
 	"image": [
 		{
 			"path": "properties/assets/images/illustration-pain-alias-module.svg",
@@ -34,6 +39,7 @@ Populate convert, optimize, rename and organise your assets. From one sources to
 				"width": 700,
 				"height": 448
 			}]
+		},
 		{
 			"path": "properties/assets/images/logo-brand__low.svg",
 			"rename": "favicon",
@@ -63,7 +69,7 @@ Some global option:
 
 input: `svg`
 
-buildfont will convert a folder that conatain `svg`  into a font. buildfont use (fontastic)[https://github.com/tancredi/fantasticon] and allow you to use some export setting from it.
+buildfont will convert a folder that conatain `svg`  into a font. buildfont use [fontastic](https://github.com/tancredi/fantasticon) and allow you to use some export setting from it.
 
 Option currently support:
 
@@ -81,7 +87,7 @@ font will convert font to various format woff, woff2
 input `svg`
 
 image convert svg file to png or svgo
-image use (sharp)[https://github.com/lovell/sharp] for the convertion to png and you can use some export settings from it.
+image use [sharp](https://github.com/lovell/sharp) for the convertion to png and you can use some export settings from it.
 
 Option currently support:
 
