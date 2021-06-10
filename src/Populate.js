@@ -10,7 +10,7 @@ class Populate {
 
 	async build(source, root) {
 		const properties = await fsx.readJson(source)
-		if (root === undefined) root = "../build"
+		if (root === undefined) root = "	./build"
 		if (!fs.existsSync(root)) fsx.mkdirs(root)
 		console.log("🎯  root export are: " + root)
 

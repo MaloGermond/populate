@@ -18,7 +18,6 @@ class Image {
 
 		const svg = await fs.readFileSync(from, (err, data) => {
 			if (err) console.error(err)
-			svg = dat
 		})
 
 		const svgo = await optimize(svg, {
