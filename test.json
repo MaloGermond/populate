@@ -1,0 +1,24 @@
+{
+	"image": [
+		{
+			"path": "properties/assets/images/logo-brand__low.svg",
+			"rename": "android-chrome",
+			"extension": "png",
+			"option": [{
+				"size": 192
+			}, {
+				"size": 512
+			}],
+			"folder": "appicons"
+		},
+		{
+			"path": "properties/assets/images/logo-brand__low.svg",
+			"rename": "apple-touch-icon",
+			"extension": "png",
+			"option": [{
+				"size": 180
+			}],
+			"folder": "appicons"
+		}
+	]
+}

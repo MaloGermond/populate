@@ -1,9 +1,10 @@
 const fs = require('fs')
-const path = require('path');
+const path = require('path')
 const sharp = require("sharp")
 const {
 	optimize
-} = require('svgo');
+} = require('svgo')
+
 
 const Utils = require("../src/Utils");
 

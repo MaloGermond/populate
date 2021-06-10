@@ -5,21 +5,24 @@ const path = require('path')
 const Font = require('../src/Font.js')
 const Image = require('../src/Image.js')
 
-
 class Populate {
 
 	async build(source, root) {
 		const properties = await fsx.readJson(source)
-		if (root === undefined) root = "	./build"
+		if (root === undefined) root = "build"
 		if (!fs.existsSync(root)) fsx.mkdirs(root)
 		console.log("🎯  root export are: " + root)
 
+		/*
+			 Convert assets from an extension to an other than store them at the right place
+		*/
 		await this.buildFont(properties.buildFont, root)
 		console.log("🏭️  Font has been successfully build")
 		await this.exportFont(properties.font, root)
 		console.log("⚒️  Font has been successfully converted")
 		await this.exportImages(properties.image, root)
 		console.log("🖼️  Images has been successfully converted")
+
 
 	}
 
@@ -106,6 +109,10 @@ class Populate {
 		})
 
 		await Promise.all(temp)
+	}
+
+	async minifyImages(dictionary, root){
+		console.log(dictionary);
 	}
 
 	async write(source) {
